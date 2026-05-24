@@ -1,4 +1,4 @@
-# Mini Checkout
+# Mini Checkout - Spec Driven Development Project (Github SpecKit)
 
 A local full-stack phone case purchase simulator with validation, in-memory stock,
 async processing feedback, and a React checkout UI.
