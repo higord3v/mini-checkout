@@ -5,10 +5,10 @@ async processing feedback, and a React checkout UI.
 
 ## Decisões/ Trade-offs
 
-MVP: velocidade de desenvolvimento escolhida ao invés de complexidade técnica
-Banco de Dados: em memória para validação e setup rápidos
-SDD: utilizado pois tem curva de aprendizado rápida, mas acelera produtividade
-STACK: apesar do typescript adicionar complexidade, foi escolhido por adicionar segurança e qualidade na entrega	
+- MVP: velocidade de desenvolvimento escolhida ao invés de complexidade técnica
+- Banco de Dados: em memória para validação e setup rápidos
+- SDD: utilizado pois tem curva de aprendizado rápida, mas acelera produtividade
+- STACK: apesar do typescript adicionar complexidade, foi escolhido por adicionar segurança e qualidade na entrega	
 
 ## Tech stack
 
