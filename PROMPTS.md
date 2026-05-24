@@ -53,3 +53,33 @@ All prompts that drive specification, planning, or implementation for this proje
 **Prompt**:
 
 > /speckit-implement
+
+---
+
+## 2026-05-24 — Feature specification (Swagger API testing)
+
+**Context**: `/speckit-specify` for interactive backend API documentation.
+
+**Prompt**:
+
+> /speckit-specify add swagger to test backend enpoints
+
+---
+
+## 2026-05-24 — Implementation plan (Swagger API docs)
+
+**Context**: `/speckit-plan` for `002-swagger-api-docs`.
+
+**Prompt**:
+
+> /speckit-plan
+
+---
+
+## 2026-05-24 — Task breakdown (Swagger API docs)
+
+**Context**: `/speckit-tasks` for `002-swagger-api-docs`.
+
+**Prompt**:
+
+> /speckit-tasks
