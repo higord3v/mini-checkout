@@ -1,0 +1,202 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Mini Checkout API",
+    "description": "Local checkout simulator API for phone case catalog and purchase attempts.\nInteractive documentation is for development and testing only (feature 002).\nCanonical business contract: specs/001-phone-case-purchase/contracts/api.md",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development API"
+    }
+  ],
+  "paths": {
+    "/api/products": {
+      "get": {
+        "operationId": "listProducts",
+        "summary": "List product catalog",
+        "description": "Returns all products with current stock for the purchase screen and manual testing.",
+        "tags": ["Products"],
+        "responses": {
+          "200": {
+            "description": "Catalog retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductListResponse"
+                },
+                "example": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "p1",
+                      "name": "Samsung Green Case",
+                      "price": 45,
+                      "stock": 5
+                    },
+                    {
+                      "id": "p2",
+                      "name": "Iphone Red Case",
+                      "price": 30,
+                      "stock": 10
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/purchases": {
+      "post": {
+        "operationId": "createPurchase",
+        "summary": "Create purchase attempt",
+        "description": "Processes a purchase for one product. Server waits 1–2 seconds before reducing stock on success.",
+        "tags": ["Purchases"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequest"
+              },
+              "example": {
+                "productId": "p1",
+                "quantity": 2
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Purchase completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PurchaseSuccessResponse"
+                },
+                "example": {
+                  "success": true,
+                  "message": "Purchase completed",
+                  "purchaseId": "550e8400-e29b-41d4-a716-446655440000"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "success": false,
+                  "message": "Invalid quantity"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "success": false,
+                  "message": "Product not found"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Insufficient stock",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "success": false,
+                  "message": "Insufficient stock"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "success": false,
+                  "message": "An unexpected error occurred"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "required": ["id", "name", "price", "stock"],
+        "properties": {
+          "id": { "type": "string", "example": "p1" },
+          "name": { "type": "string", "example": "Samsung Green Case" },
+          "price": { "type": "number", "minimum": 0, "example": 45 },
+          "stock": { "type": "integer", "minimum": 0, "example": 5 }
+        }
+      },
+      "ProductListResponse": {
+        "type": "object",
+        "required": ["success", "data"],
+        "properties": {
+          "success": { "type": "boolean", "enum": [true] },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Product" }
+          }
+        }
+      },
+      "PurchaseRequest": {
+        "type": "object",
+        "required": ["productId", "quantity"],
+        "properties": {
+          "productId": { "type": "string", "example": "p1" },
+          "quantity": { "type": "integer", "minimum": 1, "example": 2 }
+        }
+      },
+      "PurchaseSuccessResponse": {
+        "type": "object",
+        "required": ["success", "message", "purchaseId"],
+        "properties": {
+          "success": { "type": "boolean", "enum": [true] },
+          "message": { "type": "string", "example": "Purchase completed" },
+          "purchaseId": { "type": "string", "format": "uuid" }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": ["success", "message"],
+        "properties": {
+          "success": { "type": "boolean", "enum": [false] },
+          "message": { "type": "string" }
+        }
+      }
+    }
+  },
+  "tags": [
+    { "name": "Products", "description": "Catalog operations" },
+    { "name": "Purchases", "description": "Purchase attempt operations" }
+  ]
+}

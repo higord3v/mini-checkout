@@ -19,9 +19,9 @@
 
 **Purpose**: Add Swagger dependencies and OpenAPI artifact before tests or routes.
 
-- [ ] T001 Add `swagger-ui-express` to `backend/package.json` dependencies and `@types/swagger-ui-express` to devDependencies
-- [ ] T002 Create `backend/src/openapi/openapi.json` from `specs/002-swagger-api-docs/contracts/openapi.yaml` (paths `/api/products`, `/api/purchases`, all documented status codes)
-- [ ] T003 Run `cd backend && npm install` to verify lockfile and dependency resolution
+- [x] T001 Add `swagger-ui-express` to `backend/package.json` dependencies and `@types/swagger-ui-express` to devDependencies
+- [x] T002 Create `backend/src/openapi/openapi.json` from `specs/002-swagger-api-docs/contracts/openapi.yaml` (paths `/api/products`, `/api/purchases`, all documented status codes)
+- [x] T003 Run `cd backend && npm install` to verify lockfile and dependency resolution
 
 **Checkpoint**: `openapi.json` validates as OpenAPI 3; `npm install` succeeds in `backend/`.
 
@@ -37,10 +37,10 @@
 
 > **STOP**: Obtain user approval on tests T004–T006 before any implementation tasks T007+.
 
-- [ ] T004 Extend `createApp` in `backend/src/app.ts` with optional `enableApiDocs?: boolean` (no swagger mount yet)
-- [ ] T005 [P] Write failing integration test: `GET /api-docs/` returns 200 when `createApp(repo, { enableApiDocs: true })` in `backend/tests/integration/swagger.docs.test.ts`
-- [ ] T006 [P] Write failing integration tests in `backend/tests/integration/swagger.docs.test.ts`: `GET /api-docs/` returns 404 when `enableApiDocs: false`; imported spec includes paths `/api/products` and `/api/purchases`
-- [ ] T007 Run `cd backend && npm test`; confirm T005–T006 fail (red)
+- [x] T004 Extend `createApp` in `backend/src/app.ts` with optional `enableApiDocs?: boolean` (no swagger mount yet)
+- [x] T005 [P] Write failing integration test: `GET /api-docs/` returns 200 when `createApp(repo, { enableApiDocs: true })` in `backend/tests/integration/swagger.docs.test.ts`
+- [x] T006 [P] Write failing integration tests in `backend/tests/integration/swagger.docs.test.ts`: `GET /api-docs/` returns 404 when `enableApiDocs: false`; imported spec includes paths `/api/products` and `/api/purchases`
+- [x] T007 Run `cd backend && npm test`; confirm T005–T006 fail (red)
 
 **Checkpoint**: Tests exist and fail for missing swagger wiring; existing purchase/product tests still pass.
 
@@ -56,10 +56,10 @@
 
 > Tests T005–T006 were written in Phase 2; implement to turn them green.
 
-- [ ] T008 [US1] Implement `setupSwagger(app, spec)` in `backend/src/swagger/setupSwagger.ts` using `swagger-ui-express` at `/api-docs`
-- [ ] T009 [US1] Mount swagger in `backend/src/app.ts` when `enableApiDocs === true` (import `openapi.json` and call `setupSwagger`)
-- [ ] T010 [US1] Ensure `backend/src/openapi/openapi.json` documents `GET /api/products` (200) and `POST /api/purchases` (201, 400, 404, 409, 500) with `Product`, `PurchaseRequest`, and `ErrorResponse` schemas
-- [ ] T011 [US1] Run `cd backend && npm test`; fix until T005–T006 pass (green)
+- [x] T008 [US1] Implement `setupSwagger(app, spec)` in `backend/src/swagger/setupSwagger.ts` using `swagger-ui-express` at `/api-docs`
+- [x] T009 [US1] Mount swagger in `backend/src/app.ts` when `enableApiDocs === true` (import `openapi.json` and call `setupSwagger`)
+- [x] T010 [US1] Ensure `backend/src/openapi/openapi.json` documents `GET /api/products` (200) and `POST /api/purchases` (201, 400, 404, 409, 500) with `Product`, `PurchaseRequest`, and `ErrorResponse` schemas
+- [x] T011 [US1] Run `cd backend && npm test`; fix until T005–T006 pass (green)
 
 **Checkpoint**: MVP — interactive docs page loads; operations discoverable without reading source.
 
@@ -73,9 +73,9 @@
 
 ### Implementation for User Story 2
 
-- [ ] T012 [US2] Set OpenAPI `servers[0].url` to `http://localhost:3000` in `backend/src/openapi/openapi.json` so Try it out targets the running API
-- [ ] T013 [US2] Log documentation URL on dev startup in `backend/src/server.ts` (e.g. `API docs: http://localhost:${PORT}/api-docs`)
-- [ ] T014 [US2] Manual smoke test per `specs/002-swagger-api-docs/quickstart.md` (catalog 200, purchase 201, validation 400, not found 404, conflict 409)
+- [x] T012 [US2] Set OpenAPI `servers[0].url` to `http://localhost:3000` in `backend/src/openapi/openapi.json` so Try it out targets the running API
+- [x] T013 [US2] Log documentation URL on dev startup in `backend/src/server.ts` (e.g. `API docs: http://localhost:${PORT}/api-docs`)
+- [x] T014 [US2] Manual smoke test per `specs/002-swagger-api-docs/quickstart.md` (catalog 200, purchase 201, validation 400, not found 404, conflict 409)
 
 **Checkpoint**: US1 + US2 — discover and execute flows work without Postman.
 
@@ -91,13 +91,13 @@
 
 > **STOP**: Obtain user approval if adding new test cases beyond T006.
 
-- [ ] T015 [P] [US3] Add or extend test in `backend/tests/integration/swagger.docs.test.ts`: default `createApp` with `NODE_ENV=production` does not expose `/api-docs` (404)
+- [x] T015 [P] [US3] Add or extend test in `backend/tests/integration/swagger.docs.test.ts`: default `createApp` with `NODE_ENV=production` does not expose `/api-docs` (404)
 
 ### Implementation for User Story 3
 
-- [ ] T016 [US3] Default `enableApiDocs` to `process.env.NODE_ENV !== 'production'` in `backend/src/app.ts` when option omitted
-- [ ] T017 [US3] Run `cd backend && npm test`; all suites green including swagger and existing purchase tests
-- [ ] T018 [US3] Verify `npm run dev` exposes docs and document production guard in `specs/002-swagger-api-docs/quickstart.md` (already drafted — confirm accuracy after impl)
+- [x] T016 [US3] Default `enableApiDocs` to `process.env.NODE_ENV !== 'production'` in `backend/src/app.ts` when option omitted
+- [x] T017 [US3] Run `cd backend && npm test`; all suites green including swagger and existing purchase tests
+- [x] T018 [US3] Verify `npm run dev` exposes docs and document production guard in `specs/002-swagger-api-docs/quickstart.md` (already drafted — confirm accuracy after impl)
 
 **Checkpoint**: All three user stories independently satisfied; docs absent in production mode.
 
@@ -107,10 +107,10 @@
 
 **Purpose**: Documentation and final validation.
 
-- [ ] T019 [P] Add **API documentation** section to repository `README.md` with `/api-docs` URL and link to `specs/002-swagger-api-docs/quickstart.md`
-- [ ] T020 Validate `specs/002-swagger-api-docs/quickstart.md` end-to-end (install, dev server, browser docs, smoke scenarios)
-- [ ] T021 Run full backend suite: `cd backend && npm test`
-- [ ] T022 Append `/speckit-tasks` entry to `PROMPTS.md`
+- [x] T019 [P] Add **API documentation** section to repository `README.md` with `/api-docs` URL and link to `specs/002-swagger-api-docs/quickstart.md`
+- [x] T020 Validate `specs/002-swagger-api-docs/quickstart.md` end-to-end (install, dev server, browser docs, smoke scenarios)
+- [x] T021 Run full backend suite: `cd backend && npm test`
+- [x] T022 Append `/speckit-tasks` entry to `PROMPTS.md`
 - [ ] T023 Commit on `main` with conventional message (e.g. `feat(backend): add swagger api docs`)
 
 ---

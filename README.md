@@ -56,6 +56,16 @@ npm run dev
 
 Open http://localhost:5173
 
+## API documentation (Swagger)
+
+With the API running in development (`npm run dev` in `backend/`):
+
+- **Swagger UI**: http://localhost:3000/api-docs
+- Try it out: execute `GET /api/products` and `POST /api/purchases` from the browser
+- Details: [specs/002-swagger-api-docs/quickstart.md](specs/002-swagger-api-docs/quickstart.md)
+
+Interactive docs are disabled when `NODE_ENV=production`.
+
 ## Tests
 
 ```bash

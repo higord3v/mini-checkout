@@ -6,4 +6,7 @@ const app = createApp(productRepository);
 
 app.listen(PORT, () => {
   console.log(`API listening on http://localhost:${PORT}`);
+  if (process.env.NODE_ENV !== "production") {
+    console.log(`API docs: http://localhost:${PORT}/api-docs`);
+  }
 });
