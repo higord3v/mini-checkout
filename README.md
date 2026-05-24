@@ -1,100 +1,38 @@
-# Mini Checkout - Spec Driven Development Project (Github SpecKit)
+# Mini Checkout - Projeto Spec Driven Development (Github SpecKit)
 
-A local full-stack phone case purchase simulator with validation, in-memory stock,
-async processing feedback, and a React checkout UI.
+Um simulador local full-stack de compra de capinhas de celular, com validação, estoque em memória,
+feedback de processamento assíncrono e uma interface de checkout em React.
 
-## Decisões/ Trade-offs
+## Decisões / Trade-offs
 
-- MVP: velocidade de desenvolvimento escolhida ao invés de complexidade técnica
-- Banco de Dados: em memória para validação e setup rápidos
-- SDD: utilizado pois tem curva de aprendizado rápida, mas acelera produtividade
-- STACK: apesar do typescript adicionar complexidade, foi escolhido por adicionar segurança e qualidade na entrega	
+- MVP: foi priorizada a velocidade de desenvolvimento em vez da complexidade técnica
+- Banco de Dados: em memória para validação e configuração rápidas
+- SDD: utilizado por ter curva de aprendizado rápida e acelerar a produtividade
+- STACK: apesar do TypeScript adicionar complexidade, foi escolhido por trazer mais segurança e qualidade na entrega
 
 ## Tech stack
 
-| Layer | Technologies |
-|-------|----------------|
-| Backend | Node.js, TypeScript, Express, Zod |
-| Frontend | React, TypeScript, Vite |
-| Backend tests | Jest, Supertest |
-| Frontend tests | Vitest, React Testing Library |
+| Camada   | Tecnologias                |
+|----------|----------------------------|
+| Backend  | Node.js, TypeScript, Express, Zod |
+| Frontend | React, TypeScript, Vite   |
+| Testes Backend  | Jest, Supertest        |
+| Testes Frontend | Vitest, React Testing Library |
 
-## Architecture
+## Arquitetura
 
-- **Monorepo** with `backend/` and `frontend/` at the repository root.
-- **Backend**: routes → controllers → services → in-memory repository; Zod validation;
-  centralized error middleware mapping HTTP status codes.
-- **Frontend**: service layer (`productService`, `purchaseService`) over a shared
-  `api/client`; UI components stay free of direct `fetch` calls.
-- **TDD**: tests written before implementation per project constitution.
+- **Monorepo** com `backend/` e `frontend/` na raiz do repositório.
+- **Backend**: rotas → controllers → services → repositório em memória; validação com Zod;
+  middleware centralizado de erro mapeando status HTTP.
+- **Frontend**: camada de serviços (`productService`, `purchaseService`) sobre um
+  `api/client` compartilhado; componentes de UI não fazem chamadas `fetch` diretamente.
+- **TDD**: testes escritos antes da implementação conforme a constituição do projeto.
 
-## Folder structure
+## Estrutura de pastas
 
 ```text
-backend/src/     API, business logic, validation
-backend/tests/   Jest unit + integration tests
-frontend/src/    React UI, hooks, services
-frontend/tests/  Vitest component tests
-specs/           Spec Kit feature documentation
-```
-
-## Setup
-
-```bash
-cd backend && npm install
-cd ../frontend && npm install
-```
-
-## Run
-
-**API** (port 3000):
-
-```bash
-cd backend
-npm run dev
-```
-
-**UI** (port 5173):
-
-```bash
-cd frontend
-npm run dev
-```
-
-Open http://localhost:5173
-
-## API documentation (Swagger)
-
-With the API running in development (`npm run dev` in `backend/`):
-
-- **Swagger UI**: http://localhost:3000/api-docs
-- Try it out: execute `GET /api/products` and `POST /api/purchases` from the browser
-- Details: [specs/002-swagger-api-docs/quickstart.md](specs/002-swagger-api-docs/quickstart.md)
-
-Interactive docs are disabled when `NODE_ENV=production`.
-
-## Tests
-
-```bash
-cd backend && npm test
-cd frontend && npm test
-```
-
-## Assumptions
-
-- No authentication; single local user.
-- Catalog resets when the API restarts (in-memory store).
-- Currency is implicit (no conversion).
-- Purchase delay (1–2 seconds) simulates processing, not payment.
-
-## Future improvements
-
-- Persistent database
-- Order history page
-- Admin catalog management
-- E2E tests (Playwright)
-- Docker Compose for one-command startup
-
-## Feature documentation
-
-See `specs/001-phone-case-purchase/` for spec, plan, tasks, and API contract.
+backend/src/     API, lógica de negócio, validação
+backend/tests/   Testes unitários e de integração (Jest)
+frontend/src/    UI em React, hooks, serviços
+frontend/tests/  Testes de componentes (Vitest)
+specs/           Documentação de funcionalidades (Spec Kit)
