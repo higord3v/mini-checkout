@@ -43,3 +43,13 @@ All prompts that drive specification, planning, or implementation for this proje
 **Prompt**:
 
 > /speckit-tasks
+
+---
+
+## 2026-05-24 — Implementation
+
+**Context**: `/speckit-implement` for `001-phone-case-purchase`.
+
+**Prompt**:
+
+> /speckit-implement
