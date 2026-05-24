@@ -1,8 +1,5 @@
 # Mini Checkout - Projeto Spec Driven Development (Github SpecKit)
 
-Um simulador local full-stack de compra de capinhas de celular, com validação, estoque em memória,
-feedback de processamento assíncrono e uma interface de checkout em React.
-
 ## Decisões / Trade-offs
 
 - MVP: foi priorizada a velocidade de desenvolvimento em vez da complexidade técnica
